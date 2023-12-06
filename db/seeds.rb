@@ -11,7 +11,7 @@ Item.destroy_all
 ShoppingCart.destroy_all
 
 10.times do |i|
-  Item.create(name: "Item #{i}", description: "Description #{i}")
+  Item.create(name: "Item #{i}", description: "Description #{i}", price: i)
 end
 
 # tests
@@ -20,15 +20,15 @@ shopping_cart = ShoppingCart.create
 
 selected_items = Item.all.sample(3)
 
-shopping_cart.add_item(selected_items[0])
-shopping_cart.add_item(selected_items[0])
-shopping_cart.add_item(selected_items[0])
-shopping_cart.remove_item(selected_items[0])
+shopping_cart.add_item!(selected_items[0])
+shopping_cart.add_item!(selected_items[0])
+shopping_cart.add_item!(selected_items[0])
+shopping_cart.remove_item!(selected_items[0])
 
-shopping_cart.add_item(selected_items[1])
-shopping_cart.remove_item(selected_items[1])
+shopping_cart.add_item!(selected_items[1])
+shopping_cart.remove_item!(selected_items[1])
 
-shopping_cart.add_item(selected_items[2])
+shopping_cart.add_item!(selected_items[2])
 
 pp CartItem.where(shopping_cart:, item: selected_items[0]).count == 1
 pp CartItem.find_by(shopping_cart:, item: selected_items[0]).quantity == 2
