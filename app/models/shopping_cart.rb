@@ -3,14 +3,18 @@ class ShoppingCart < ApplicationRecord
   has_many :items, through: :cart_items
 
   def add_item(item)
-    cart_items.find_or_create_by(item: item).increment(:quantity)
+    cart_items.find_or_create_by(item:).increment(:quantity).save
   end
 
   def remove_item(item)
     cart_item = cart_items.find_by(item: item)
-    if cart_item&.quantity >= 1
+    if cart_item.present? && cart_item.quantity >= 1
       cart_item.decrement(:quantity)
-      cart_item.destroy if cart_item.quantity.zero?
+      if cart_item.quantity.zero?
+        cart_item.destroy
+      else
+        cart_item.save
+      end
     end
   end
 
