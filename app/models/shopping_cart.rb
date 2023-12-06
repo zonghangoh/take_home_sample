@@ -2,11 +2,11 @@ class ShoppingCart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :items, through: :cart_items
 
-  def add_item(item)
+  def add_item!(item)
     cart_items.find_or_create_by(item:).increment(:quantity).save
   end
 
-  def remove_item(item)
+  def remove_item!(item)
     cart_item = cart_items.find_by(item: item)
     if cart_item.present? && cart_item.quantity >= 1
       cart_item.decrement(:quantity)
