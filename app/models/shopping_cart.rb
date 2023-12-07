@@ -7,7 +7,7 @@ class ShoppingCart < ApplicationRecord
   end
 
   def remove_item!(item)
-    cart_item = cart_items.find_by(item: item)
+    cart_item = cart_items.find_by(item:)
     if cart_item.present? && cart_item.quantity >= 1
       cart_item.decrement(:quantity)
       if cart_item.quantity.zero?
