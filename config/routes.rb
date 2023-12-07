@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :shopping_carts, only: [:show] do
-    post :add_to_cart, on: :member
-    post :remove_from_cart, on: :member
+    patch :add_to_cart, on: :member
+    patch :remove_from_cart, on: :member
   end
 
   namespace :admin do
