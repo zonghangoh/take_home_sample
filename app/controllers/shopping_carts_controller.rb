@@ -32,6 +32,6 @@ class ShoppingCartsController < ApplicationController
   private
 
   def shopping_cart
-    @shopping_cart ||= ShoppingCart.find_by(id: params[:id])
+    @shopping_cart ||= ShoppingCart.includes(cart_items: :item).find_by(id: params[:id])
   end
 end

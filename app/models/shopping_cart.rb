@@ -19,6 +19,6 @@ class ShoppingCart < ApplicationRecord
   end
 
   def total_cost
-    includes(cart_items: :item).cart_items.sum { |cart_item| cart_item.quantity * cart_item.item.price }
+    cart_items.sum { |cart_item| cart_item.quantity * cart_item.item.price }
   end
 end
