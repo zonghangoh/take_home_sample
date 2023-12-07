@@ -29,6 +29,8 @@ class ShoppingCartsController < ApplicationController
     }
   end
 
+  private
+
   def shopping_cart
     @shopping_cart ||= ShoppingCart.find_by(id: params[:id])
   end
